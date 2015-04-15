@@ -6,7 +6,8 @@ $(document).ready(function()
 	 	height = canvas.height(),
 		dark = "#000000",
 	 	light = "#FFFFFF",
-	 	curCircles = [];
+	 	curCircles = [],
+	 	radius = 10;
 
 	function line(x1,y1,x2,y2) {
 		ctx.beginPath();
@@ -16,40 +17,59 @@ $(document).ready(function()
 	}
 
 	function circle(x, y, r, c) {
-		ctx.beginPath();
-		ctx.arc(x, y, r, 0, 2*Math.PI);
-		ctx.fillStyle = c;
-		ctx.fill();
 		curCircles.push({cx : x, cy : y, cr : r});
 	}
 
-	function compute_circle(x,y) {
-		var radius = 10;
-		var search_radius = 30;
-		var search_radius_squared = search_radius*search_radius;
-		circle(x,y,radius);
-		var t = Math.random() * 2 * Math.PI;
-		var attempts = 200;
-		for (var i = 0; i < attempts; i++) {
-			var nx = search_radius * Math.cos(t) + x;
-			var ny = search_radius * Math.sin(t) + y;
+	function add_circles() {
+		var num_added = 0;
+		for (var i = 0; i < curCircles.length; i++) {
+			var search_radius = 30 + Math.random() * 30.0;
+			var search_radius_squared = search_radius*search_radius;
+			var t = Math.random() * 2 * Math.PI;
+
+			var curCircle = curCircles[i];
+			var t = Math.random() * Math.PI * 2;
+			var nx = search_radius * Math.cos(t) + curCircle.cx;
+			var ny = search_radius * Math.sin(t) + curCircle.cy;
+			if ((nx > width + radius) || (nx < -radius) || (ny > height + radius) || (ny < -radius))
+				continue;
 			var s = 0;
 			var found = false;
 			for (s = 0; s < curCircles.length; s++) {
 				var test_circle = curCircles[s];
 				var dist_squared = (nx-test_circle.cx)*(nx-test_circle.cx)+(ny-test_circle.cy)*(ny-test_circle.cy);
-				if (dist_squared < search_radius_squared) {
+				if ((dist_squared < search_radius_squared) && (dist_squared > 0)) {
 					found = true;
 					break;
 				}
 			}
 			if (!found) {
-				line(x,y,nx,ny);
-				compute_circle(nx,ny,radius); // draw line
+				line(curCircle.cx,curCircle.cy,nx,ny);
+				circle(nx,ny,radius, dark);
+				num_added++;
 			}
-			t += Math.random() * ((Math.PI * 2) / attempts);
 		}
+		return num_added;
 	}
 
-	compute_circle(Math.random() * width, Math.random() * height);
+	circle(Math.random() * width, Math.random() * height, radius, dark);
+	var zero_added = 0;
+	while (zero_added < 64) {
+		if (add_circles() > 0) {
+			zero_added = 0;
+		} else {
+			zero_added++;
+		}
+	}
+	var i;
+	for (i=0; i < curCircles.length; i++) {
+		var curCircle = curCircles[i];
+
+		ctx.beginPath();
+		ctx.arc(curCircle.cx, curCircle.cy, curCircle.cr, 0, 2*Math.PI);
+		ctx.fillStyle = dark;
+		ctx.fill();
+		ctx.strokeStyle = dark;
+		ctx.stroke();
+	}
 });
