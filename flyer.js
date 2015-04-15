@@ -7,7 +7,7 @@ $(document).ready(function()
 		dark = "#000000",
 	 	light = "#FFFFFF",
 	 	curCircles = [],
-	 	radius = 10;
+	 	radius = 20;
 
 	function line(x1,y1,x2,y2) {
 		ctx.beginPath();
@@ -23,7 +23,7 @@ $(document).ready(function()
 	function add_circles() {
 		var num_added = 0;
 		for (var i = 0; i < curCircles.length; i++) {
-			var search_radius = 30 + Math.random() * 30.0;
+			var search_radius = 50 + Math.random() * 50.0;
 			var search_radius_squared = search_radius*search_radius;
 			var t = Math.random() * 2 * Math.PI;
 
@@ -65,11 +65,35 @@ $(document).ready(function()
 	for (i=0; i < curCircles.length; i++) {
 		var curCircle = curCircles[i];
 
-		ctx.beginPath();
-		ctx.arc(curCircle.cx, curCircle.cy, curCircle.cr, 0, 2*Math.PI);
-		ctx.fillStyle = dark;
-		ctx.fill();
-		ctx.strokeStyle = dark;
-		ctx.stroke();
+		// ctx.beginPath();
+		// ctx.arc(curCircle.cx, curCircle.cy, curCircle.cr, 0, 2*Math.PI);
+		// ctx.fillStyle = dark;
+		// ctx.fill();
+		// ctx.strokeStyle = dark;
+		// ctx.stroke();
+
+		var num_sides = Math.floor(3 + Math.random() * 5);
+		var t = Math.random() * 2 * Math.PI;
+		var j, q;
+		var radii = [1.0, 0.66, 0.60, 0.33];
+
+		for (q = 0; q < radii.length; q++) {
+			ctx.beginPath();
+			for (j = 0; j <= num_sides; j++) {
+				var x,y;
+				x = (curCircle.cr * radii[q]) * Math.cos(t) + curCircle.cx;
+				y = (curCircle.cr * radii[q]) * Math.sin(t) + curCircle.cy;
+				if (j==0)
+					ctx.moveTo(x,y);
+				else
+					ctx.lineTo(x,y);
+				t += (Math.PI * 2) / num_sides;
+
+				ctx.fillStyle = (q == 3 ? dark : light);
+				ctx.strokeStyle = dark;
+				ctx.stroke();
+				ctx.fill();
+			}
+		}
 	}
 });
