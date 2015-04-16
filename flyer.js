@@ -4,15 +4,20 @@ $(document).ready(function()
 	 	ctx = canvas.get(0).getContext("2d"),
 	 	width = canvas.width(),
 	 	height = canvas.height(),
-		dark = "#000000",
-	 	light = "#FFFFFF",
+		dark = "#DDDDDD",
+	 	light = "#000000",
 	 	curCircles = [],
 	 	radius = 20;
+
+	ctx.fillStyle = "#111111";
+	ctx.fillRect(0,0,width,height);
+	ctx.translate(0.5, 0.5);
 
 	function line(x1,y1,x2,y2) {
 		ctx.beginPath();
 		ctx.moveTo(x1,y1);
 		ctx.lineTo(x2,y2);
+		ctx.strokeStyle = dark;
 		ctx.stroke();
 	}
 
