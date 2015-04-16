@@ -4,7 +4,7 @@ $(document).ready(function()
 	 	ctx = canvas.get(0).getContext("2d"),
 	 	width = canvas.width(),
 	 	height = canvas.height(),
-		dark = "#DDDDDD",
+		dark = "#444444",
 	 	light = "#000000",
 	 	curCircles = [],
 	 	radius = 20;
@@ -12,6 +12,8 @@ $(document).ready(function()
 	ctx.fillStyle = "#111111";
 	ctx.fillRect(0,0,width,height);
 	ctx.translate(0.5, 0.5);
+	ctx.imageSmoothingEnabled = true;
+	ctx.lineWidth = 3;
 
 	function line(x1,y1,x2,y2) {
 		ctx.beginPath();
@@ -80,7 +82,7 @@ $(document).ready(function()
 		var num_sides = Math.floor(3 + Math.random() * 5);
 		var t = Math.random() * 2 * Math.PI;
 		var j, q;
-		var radii = [1.0, 0.66, 0.60, 0.33];
+		var radii = [1.0, 0.99, 0.66, 0.60, 0.25];
 
 		for (q = 0; q < radii.length; q++) {
 			ctx.beginPath();
@@ -94,7 +96,7 @@ $(document).ready(function()
 					ctx.lineTo(x,y);
 				t += (Math.PI * 2) / num_sides;
 
-				ctx.fillStyle = (q == 3 ? dark : light);
+				ctx.fillStyle = (q == 4 ? dark : light);
 				ctx.strokeStyle = dark;
 				ctx.stroke();
 				ctx.fill();
