@@ -1,5 +1,25 @@
-$(document).ready(function()
-{
+
+function sizeCanvas() {
+var canvases = document.getElementsByTagName('canvas');
+
+for (var i = 0; i < canvases.length; i++) {
+
+
+    canvases[i].style.width = '100%';
+    canvases[i].style.height = '100%';
+    canvases[i].width = canvases[i].clientWidth;
+    canvases[i].height = canvases[i].clientHeight;
+	}
+
+}
+
+function flyer() {
+	sizeCanvas();
+
+	var c = $("#myCanvas");
+	c.width(c.width());
+	c.height(c.height());
+
 	var canvas = $("#myCanvas"),
 	 	ctx = canvas.get(0).getContext("2d"),
 	 	width = canvas.width(),
@@ -103,4 +123,8 @@ $(document).ready(function()
 			}
 		}
 	}
-});
+}
+
+$( window ).resize(flyer);
+
+$(document).ready(flyer);

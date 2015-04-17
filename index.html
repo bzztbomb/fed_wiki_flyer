@@ -1,65 +1,98 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="flyer.css" />
 <body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="flyer.js"></script>
-<link href='http://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300|Fjalla+One' rel='stylesheet' type='text/css'>
 
 <style>
+
 * { margin:0; padding:0; } /* to remove the top and left whitespace */
 
-html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
+html, body { width:100%; height:100%; font-family: 'Open Sans', sans-serif; } /* just to be sure these are full screen*/
 
-canvas { display:block; } /* To remove the scrollbars */
+canvas {
+  margin: 0;
+  padding: 0;
+  display:block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
 #info-container {
   position: absolute;
   left: 0px;
   top: 0px;
-  width: 800px;
-  height: 450px;
+  width: 100%;
+  height: 100%;
   color: white;
 }
 
 #header {
-  background-color: rgba(99, 99, 99, 0.5);
-  font-size: 40px;
-  height: 150px;
+  background-color: rgba(99, 99, 99, 0.35);
+  font-size: 60px;
   text-align: center;
-  vertical-align: middle;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  line-height: 75px;
 }
 
 #header h1 {
-  color: red;
-  font-size: 60px;
-  font-family: "Montserrat";
-  font-weight: bold;
+  color: #fc3da5;
+  font-size: 69px;
+  font-family: 'Fjalla One';
 }
 
 #subheader {
-  background-color: rgba(99, 99, 99, 0.25);
-  height: 100px;
-  font-size: 25px;
+  background-color: rgba(99, 99, 99, 0.2);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 45px;
+  padding-right: 45px;
+  font-weight: 300;
+  letter-spacing: .05em;
 }
 
 #more-info {
-  font-size: 20px;
+  font-size: 15px;
+  line-height: 21px;
+  color: rgb(222,222,222);
+  letter-spacing: .05em;
   text-align: right;
   position: absolute;
   bottom: 0;
-  width: 800px;
+  width: 95%;
+  padding-bottom: 20px;
+  margin-right: 20px;
 }
 
 .info-type {
-  font-weight: bold;
-  color: rgb(200,20,20);
+  font-weight: 400;
+  color: rgb(222,222,222);
+}
+
+H2 {
+  font-size: 28px;
+  line-height: 34px;
+  font-family: 'Fjalla One', sans-serif;
+  color: #fc3da5;
+}
+
+H3 {
+  font-size: 18px;
+  line-height: 24px;
 }
 
 </style>
 
-<canvas id="myCanvas" width="800" height="450" style="border:1px solid #d3d3d3;">
+<canvas id="myCanvas">
 Your browser does not support the HTML5 canvas tag.
 </canvas>
 
@@ -68,15 +101,15 @@ Your browser does not support the HTML5 canvas tag.
     <h1>FEDERATED WIKI WORKSHOP</h1>
   </div>
   <div id="subheader">
-    Learn about Federated Wiki: A decentralized approach to collobration and publication.  It differs from a standard wiki in that you can run your own server and share your changes with others running their own servers.
+    LEARN ABOUT FEDERATED WIKI: A decentralized approach to collaboration and publication.  It differs from a standard wiki in that you can run your own server and share your changes with others running their own servers.
   </div>
   <div id="more-info">
-    <span class="info-type">Instructor:</span> Ward Cunningham <br>
-    <span class="info-type">When:</span> Sunday April 26th, 1-5pm <br>
-    <span class="info-type">Where:</span> Ctrl-H (7608 N. Interstate, Portland, OR 97217) <br>
-    <span class="info-type">Cost:</span> Free (+ donation for Ctrl-H) <br>
-    <span class="info-type">Bring:</span> Laptop with Node pre-installed <br>
-    <span class="info-type">RSVP:</span> bzzt@knowhere.net <br>
+    <H2>Sunday, April 26th, 1-5pm</H2>
+    <H3>with Ward Cunningham</H3>
+    <STRONG>Ctrl-H,</STRONG> 7608 N. Interstate, Portland, OR 97217<br>
+    FREE! (+ Donation for Ctrl-H)<br>
+    Bring a laptop with node (http://nodejs.org) pre-installed<br>
+    RSVP to bzzt@knowhere.net
   </div>
 </div>
 
